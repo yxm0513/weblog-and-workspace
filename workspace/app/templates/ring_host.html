@@ -1,0 +1,20 @@
+{% extends "admin.html"%}
+{% set title = "Edit Ring" %}
+
+{% block main%}
+	<div id="main">
+		<h2> Add a new ring: </h2>
+		<form action="{{url_for('admin.ring')}}" method="POST">
+		<label for="name">Name</label> 
+		<input id="name" name="name" ring="text" value=""/> <br/>
+		<input id="add" name="add" type="submit" value="Add"/>
+		</form>
+		
+		<h2> Current rings: </h2>
+		<ul>
+		{% for ring in rings %}
+		<li> Name: {{ring.name}} <a href="{{url_for('admin.delring', name=ring.name)}}"> Delete</a></li>
+		{% endfor %}
+		</ul>
+	</div>
+{% endblock %}

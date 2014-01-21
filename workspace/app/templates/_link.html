@@ -1,0 +1,10 @@
+<ul> 
+	{% if not links %}
+		<p>No Link!</p>
+	{% else %}
+		{% for l in links%}
+			<li> <a href="{{l.url}}" target="_blank"> {{l.name}} </a></li>
+		{% endfor %}
+	{% endif%}
+</ul>
+

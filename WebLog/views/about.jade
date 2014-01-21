@@ -1,0 +1,38 @@
+extends layout
+block content
+    div.container
+      nav.navbar.navbar-inverse
+        ul.nav.navbar-nav
+          li 
+             a(href='/') Log
+          li 
+             a(href='/pxe') PXE
+          li.active 
+             a(href='/about') About
+      
+      div.jumbotron
+        div.container
+          h1 About tools
+          p System only works on vnxe, it will do below collections, save files to AR folder automaticlly.
+      row
+        h3 log collecction
+        p
+          ul
+             li perform data collection by svc_dc, so svc_dc need working.
+             li triage command, save output to AR folder.
+             li cores in /cores and backend, save output to AR folder.
+
+        h6 And:  
+        p
+          ul 
+             li data collection is base on array command svc_dc, if it can not do a full collection, this system can not help it, it will only do what svc_dc does.
+             li if AR option is not specified, the files will save on array.
+             li if you close web browser, system will contine finish data collection, but you can not get collection status, even it already failed.
+
+      row
+        h3 PXE
+        p
+          ul
+            li it only do set boot and power cycle now, can not select image here, becasue of permission to access PXE database http://brick-bart.sspg.lab.emc.com.
+      row
+       <A HREF="javascript:history.back()">Go Back</A>

@@ -1,0 +1,60 @@
+{% extends "layout.html"%}
+{% set title = "Edit Host" %}
+
+{% block main%}
+	<div id="main">
+		<h1> Host: {{host.hostname}} </h1>
+		<form action="{{url_for('host_edit')}}" method="POST">
+		<label for="type">Host Type</label>
+		<select id="type" name="type" >
+			{% if not types %}
+				<option value="notype">No type added.</option>
+			{% else %}
+				{% for type in types %}
+					{% if type.name == host.type %}
+						<option value="{{type.name}}" selected="selected">{{type.name}}</option>
+					{% else %}
+						<option value="{{type.name}}">{{type.name}}</option>
+					{% endif%}
+				{% endfor %}
+			{% endif %}
+		</select>
+		<label for="web_user">Web User</label>
+		<input id="web_user" name="web_user" type="text" value="{{host.web_user}}"/> 
+		<input id="web_pwd" name="web_pwd" type="text" value="{{host.web_pwd}}"/>
+		<label for="naviseccli_user">CLI User</label>
+		<input id="naviseccli_user" name="naviseccli_user" type="text" value="{{host.naviseccli_user}}"/> 
+		<input id="naviseccli_pwd" name="naviseccli_pwd" type="text" value="{{host.naviseccli_pwd}}"/>
+		<label for="rdp_user">RDP User</label>
+		<input id="rdp_user" name="rdp_user" type="text" value="{{host.rdp_user}}"/> 
+		<input id="rdp_pwd" name="rdp_pwd" type="text" value="{{host.rdp_pwd}}"/> 
+		<label for="ra_user">RA User</label>
+		<input id="ra_user" name="ra_user" type="text" value="{{host.ra_user}}"/> 
+		<input id="ra_pwd" name="ra_pwd" type="text" value="{{host.ra_pwd}}"/> 
+		<label for="putty_user">PUTTY User</label>
+		<input id="putty_user" name="putty_user" type="text" value="{{host.putty_user}}"/> 
+		<input id="putty_pwd" name="putty_pwd" type="text" value="{{host.putty_pwd}}"/> 
+		<label>Rings</label>
+		<select name="ring" >
+			{% if not rings %}
+				<option value="noring" selected="selected">please add a ring first</option>
+			{% else %}
+					{% set exists = [] %}
+					{% for ring in rings %}
+						{% if ring.name == host.ring.name %}
+							{% do exists.append(1) %}
+							<option value="{{ring.name}}" selected="selected">{{ring.name}}</option>
+						{% else %}
+							<option value="{{ring.name}}">{{ring.name}}</option>
+						{% endif%}
+					{% endfor %}
+					{% if not exists %}
+						<option value="noring" selected="selected">please select a ring</option>
+					{% endif %}
+			{% endif %}
+		</select>
+		<input name="hostname" value="{{host.hostname}}" type="hidden"/>
+		<input id="update" name="update" type="submit" value="Update"/>
+		</form>
+	</div>
+{% endblock %}

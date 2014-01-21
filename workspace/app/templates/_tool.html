@@ -1,0 +1,10 @@
+<ul> 
+	{% if not tool %}
+		<p>No Tool!</p>
+	{% else %}
+		{% for t in tool%}
+			<li> <a href="javascript:exec('putty.exe -ssh {{t.host}} -l {{t.user}} -pw {{t.pwd}}')"> {{t.name}} </a> &nbsp; <a href="{{url_for('index.deltool', name=t.name)}}">[X]</a></li>
+		{% endfor %}
+	{% endif%}
+</ul>
+

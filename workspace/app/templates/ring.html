@@ -1,0 +1,31 @@
+{% extends "admin.html"%}
+{% set title = "Admin Ring" %}
+
+{% block main%}
+	<div id="main">
+		<h2> Add a new ring: </h2>
+		<form action="{{url_for('admin.ring')}}" method="POST">
+		<label for="name">Name</label> 
+		<input id="name" name="name" ring="text" value=""/>
+		<input id="add" name="add" type="submit" value="Add"/>
+		</form>
+		
+		<h2> Current rings: </h2>
+		<ul>
+		{% for ring in rings %}
+		{% if ring.name == "unringed" %}
+		<li> Name: {{ring.name}} <a href="{{url_for('admin.delring', name=ring.name)}}"></a></li>
+		{% else %}
+		<li> Name: {{ring.name}} <a href="{{url_for('admin.delring', name=ring.name)}}"> Delete</a></li>
+		{% endif %}
+			{% if ring.hosts %}
+				<ul>
+					{% for host in ring.hosts %}
+					<li>{{host.hostname}}</li>
+					{% endfor %}
+				</ul>
+			{% endif %}
+		{% endfor %}
+		</ul>
+	</div>
+{% endblock %}

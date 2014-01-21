@@ -1,0 +1,48 @@
+<!doctype html>
+<head>
+	<title>My Workspace -- {{title}}</title>
+	<link rel="stylesheet" type="text/css" href= "{{ url_for('.static', filename='css/base.css') }}"/>
+	<link rel="stylesheet" type="text/css" href= "{{ url_for('.static', filename='css/sticky.css') }}"/>
+	<link rel="stylesheet" type="text/css" href= "{{ url_for('.static', filename='css/apprise.css') }}"/>
+	<script type=text/javascript  src="{{ url_for('.static', filename='js/jquery-1.7.2.js') }}"></script>
+	<script type=text/javascript  src="{{ url_for('.static', filename='js/sticky.js') }}"></script>
+	<script type=text/javascript  src="{{ url_for('.static', filename='js/apprise.js') }}"></script>
+	<script type=text/javascript>
+  		$SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+	</script>
+	<script type=text/javascript src="{{ url_for('.static', filename='js/base.js') }}"></script>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="expires" content="0">
+</head>
+
+<body>
+{% block body%}
+	<div id="menu">
+		<a href="{{url_for('index.index')}}">Index</a> |
+		<a href="{{url_for('admin.index')}}">Admin</a> |
+		<a href="{{url_for('index.about')}}">About</a> 
+	</div>
+	{% block container%}
+	<div id="container">
+
+		<div id="messages" display="none">
+		</div>
+		{% block left%}
+			<div id="l-column">
+			{% block toolbox%}
+				<div id="toolbox"> </div>
+			{% endblock %}
+			{% block linkbox%}
+				<div id="linkbox"> </div>
+			{% endblock %}
+			</div>
+		{% endblock%}
+		
+		{% block main%}
+		
+		{% endblock %}
+	</div>
+	{% endblock %}
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,29 @@
+{% extends "admin.html"%}
+{% set title = "Edit SSH" %}
+
+{% block main%}
+	<div id="main">
+		<h2> Add a ssh: </h2>
+		<form action="{{url_for('admin.ssh')}}" method="POST">
+		<label for="name">Name</label> 
+		<input id="name" name="name" type="text" value=""/> 
+		<label for="name">Host</label> 
+		<input id="host" name="host" type="text" value=""/>
+		<label for="name">User</label> 
+		<input id="user" name="user" type="text" value=""/>
+		<label for="name">Password</label> 
+		<input id="pwd" name="pwd" type="text" value=""/>
+		<input id="add" name="add" type="submit" value="Add"/>
+		</form>
+		<h2> Current ssh: </h2>	
+		<ul> 
+		{% if not sshs %}
+			<p>No SSH!</p>
+		{% else %}
+			{% for s in sshs%}
+				<li> <a href="javascript:exec('putty.exe -ssh {{s.host}} -l {{s.user}} -pw {{s.pwd}}')"> {{s.name}} </a> &nbsp; <a href="{{url_for('admin.delssh', name=s.name)}}"> Delete </a></li>
+			{% endfor %}
+		{% endif%}
+		</ul>
+	</div>
+{% endblock %}

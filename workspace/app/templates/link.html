@@ -1,0 +1,22 @@
+{% extends "admin.html"%}
+{% set title = "Edit Link" %}
+
+{% block main %}
+	<div id="main">
+		<h2> Add a new link: </h2>
+		<form action="{{url_for('admin.link')}}" method="POST">
+		<label for="name">Name</label> 
+		<input id="name" name="name" type="text" value=""/>
+		<label for="url">URL</label> 
+		<input id="url" name="url" type="text" value=""/>
+		<input id="add" name="add" type="submit" value="Add"/>
+		</form>
+		
+		<h2> Current links: </h2>
+		<ul>
+		{% for link in links %}
+		<li> Name: {{link.name}} <a href="{{url_for('admin.dellink', name=link.name)}}"> Delete</a></li>
+		{% endfor %}
+		</ul>
+	</div>
+{% endblock %}

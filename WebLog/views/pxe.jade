@@ -1,0 +1,29 @@
+extends layout
+block content
+  script(src='/pxe.js')
+  body
+    div.container
+      nav.navbar.navbar-inverse
+        ul.nav.navbar-nav
+          li
+            a(href='/') Log
+          li.active
+            a(href='/pxe') PXE
+          li
+            a(href='/about') About
+      div.span10.offset2
+        h1
+          | set boot to pxe and do power cycle
+        div
+          form.form-horizontal()
+            div.form-group
+              label.col-lg-2.control-label(for='hostname') System Name:
+              div.col-lg-5
+                input.form-control(id='hostname',type='text',value='', placeholder='e.g. BC-D1000')
+            div.form-group
+              div.col-lg-offset-2.col-lg-5
+                input.btn.btn-default.pull-right(id='submit',type='button',value='Submit')
+        div.page.green
+          .page-container
+             div#status.red Disconnected
+             div#data

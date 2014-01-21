@@ -1,0 +1,55 @@
+{% extends "layout.html"%}
+{% set title = "Index" %}
+{% block main%}
+	<div id="main">			
+		<div id="add_host">
+			<form action="" method="POST">
+			<label for="host">Add Hostname</label>
+			<input id="host" name="host" type="text" value=""/>
+			<select id="type" name="type" >
+				{% if not types %}
+					<option value="notype">No type added.</option>
+				{% else %}
+					{% for type in types %}
+					<option value="{{type.name}}">{{type.name}}</option>
+					{% endfor %}
+				{% endif %}
+			</select>
+			<input id="add" name="add" type="submit" value="Submit"/>
+			</form>
+		</div>
+		<h2> Registered Machines: </h2>
+		
+		{% for ring in rings %}  
+			{% if ring.hosts[0] %}
+			<div class="ringheader">{{ring.name}}</div> 
+			<div class="list_host">
+					{% for host in ring.hosts %}
+					<div id="{{host.hostname}}">
+						<h4 class="host_title">Hostname: {{host.hostname}} -- {{host.type}} </h4>
+						
+						<a href="{{url_for('index.host_delete', hostname=host.hostname)}}">Delete</a> |
+						<a href="javascript:onclick=host_check('{{host.hostname}}')">Check</a> |
+						<a href="javascript:onclick=show_access('{{host.hostname}}')" class="show">Show Access</a> |
+						<a href="{{url_for('index.host_edit', hostname=host.hostname)}}">Edit</a>
+
+						<ul class="services">
+							{% if host.type == "IO HOST" or host.type == "VM" %}
+							<li><a href="javascript:exec('open_rdp.pyw {{host.hostname}}')">Remote Desktop</a> <span class="pwd_info"> {{host.rdp_user}} / {{host.rdp_pwd}} </span></li>
+							<li><a href="javascript:exec('putty {{host.hostname}}')">putty</a> <span class="pwd_info"> {{host.putty_user}} / {{host.putty_pwd}} </span></li>
+							{% else %}
+							<li><a href="http://{{host.hostname}}" target="_blank">Web</a> <span class="pwd_info">{{host.web_user}} / {{host.web_pwd}} </span></li>
+							<li><a href="javascript:exec('CleanArray.pl -SPA {{host.hostname}} -User {{host.web_user}} -Password {{host.web_pwd}} -Remove All')">CleanArray</a> <span class="pwd_info">{{host.web_user}} / {{host.web_pwd}} </span></li>
+							<li><a href="javascript:exec('open_ra.pyw {{host.hostname}}')">Remotely Anywhere</a> <span class="pwd_info"> {{host.ra_user}} / {{host.ra_pwd}} </span></li>
+							<li><a href="javascript:exec('putty {{host.hostname}}')">putty</a> <span class="pwd_info"> {{host.putty_user}} / {{host.putty_pwd}} </span></li>
+							{% endif %}
+						</ul>
+
+					</div>
+					{% endfor %}
+			 </div>
+			{% endif %}
+		{% endfor %}
+	</div>
+
+{% endblock %}

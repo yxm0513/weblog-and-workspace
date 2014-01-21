@@ -1,0 +1,10 @@
+<ul> 
+	{% if not sshs %}
+		<p>No SSH!</p>
+	{% else %}
+		{% for s in sshs%}
+			<li> <a href="javascript:exec('putty.exe -ssh {{s.host}} -l {{s.user}} -pw {{s.pwd}}')"> {{s.name}} </a>
+		{% endfor %}
+	{% endif%}
+</ul>
+

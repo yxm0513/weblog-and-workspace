@@ -1,0 +1,37 @@
+extends layout
+block content
+  script(src='/weblog.js')
+  body
+    div.container
+      nav.navbar.navbar-inverse
+        ul.nav.navbar-nav
+          li.active
+             a(href='/') Log
+          li
+             a(href='/pxe') PXE
+          li
+             a(href='/about') About
+      div.span10.offset2
+        h1
+          | VNXe Online Log collection
+        div.row
+          div.col-lg-8
+            form.form-horizontal()
+              div.form-group
+                label.col-lg-4.control-label(for='hostname') System Name: 
+                div.col-lg-6
+                  input.form-control(id='hostname',type='text',value='', placeholder='e.g. BC-D1000')
+              div.form-group
+                label.col-lg-4.control-label(for='ar') AR:   
+                div.col-lg-6
+                  input.form-control(id='ar',type='text',value='', placeholder='e.g. 572303')
+              div.form-group
+                div.col-lg-offset-4.col-lg-6
+                  input.btn.btn-default.pull-right(id='submit',type='button',value='Submit')
+          div.statusbar.col-lg-4
+            div#action
+            div#actionstatus
+        div.page.green
+          .page-container
+             div#status.red Disconnected
+             div#data

@@ -1,0 +1,4 @@
+<li><a href="http://{{hostname}}">Web</a> <span class="status_ok">{% if result['Web'] %} -- Open {% endif %}</span></li>
+<li><a href="javascript:exec('open_rdp.pyw {{hostname}}')">Remote Desktop</a> <span class="status_ok">{% if result['Remote Desktop'] %} -- Open {% endif %}</span></li>
+<li><a href="javascript:exec('open_ra.pyw {{hostname}}')">Remotely Anywhere</a> <span class="status_ok">{% if result['Remotely Anywhere'] %} -- Open {% endif %}</span></li>
+<li><a href="javascript:exec('putty {{hostname}}')">putty</a> <span class="status_ok">{% if result['putty'] %} -- Open {% endif %}</span></li>
